@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;  
+
+.login-main {
+  background: url('/main-car.png') no-repeat;
+  background-size: cover
+}
+
+.login-title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  color: #1A202C;
+}
+
+.form-login {
+  width: 350px;
+  height: 215px;
+}
+
+.cars {
+  border: 1px solid rgba(128, 128, 128, 0.368);
+}
+
+.image {
+  border: 1px solid rgba(128, 128, 128, 0.368);
+}
