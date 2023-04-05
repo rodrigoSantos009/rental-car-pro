@@ -62,7 +62,13 @@ export class UserController {
     try {
       const user = await this.userUseCase.getUserById(id)
 
-      return res.status(200).json(user)
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' })
+      }
+
+      const { password:_, ...rest } = user
+
+      return res.status(200).json(rest)
     } catch(e) {
       return res.status(400).json({ e })
     }

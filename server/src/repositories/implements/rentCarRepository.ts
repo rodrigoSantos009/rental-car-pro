@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import dayjs from "dayjs";
 import { RentCar } from "entities/RentCar";
 import { IRentCarRepository } from "repositories/IRentCarRepository";
 
@@ -33,6 +34,20 @@ export class RentCarRepository implements IRentCarRepository {
         available: false
       }
     })
+
+    const today = dayjs().startOf('day').toDate()
+    const returnCar = dayjs(data.returned_at).toDate()
+
+    if(today === returnCar) {
+      await this.prisma.car.update({
+        where: {
+          id: data.car_id
+        },
+        data: {
+          available: true
+        }
+      })
+    }
   }
 
   async getRentedCar(id: string): Promise<RentCar | null> {
@@ -44,13 +59,6 @@ export class RentCarRepository implements IRentCarRepository {
   }
 
   async getRentedCars(): Promise<RentCar[]> {
-    const rentals = await this.prisma.rentals.findMany()
-
-    console.log('rentals:', rentals)
-    if (rentals !== null) {
-      return rentals
-    } else {
-      return []
-    }
+    return await this.prisma.rentals.findMany()
   }
 }

@@ -73,7 +73,7 @@ export class UserUseCase {
     return user
   }
 
-  async getUsers() {
+  async getUsers(): Promise<User[]> {
     const users = await this.userRepository.getUsers()
 
     return users
