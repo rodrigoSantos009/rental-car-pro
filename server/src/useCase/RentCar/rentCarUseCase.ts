@@ -1,17 +1,29 @@
+import { ICarRepository } from "repositories/ICarRepository";
 import { RentCar } from "../../entities/RentCar";
 import { IRentCarRepository } from "../../repositories/IRentCarRepository";
 import { IRentCarDTO } from "./rentCarDTO";
+import { IUserRepository } from "repositories/IUserRepository";
+//import { RentCarError } from "errors/rentCarErrors/RentCarError";
+import { RentCarError } from "../../errors/rentCarErrors/RentCarError"
 
 export class RentCarUseCase {
   constructor(
-    private rentCarRepository: IRentCarRepository
+    private rentCarRepository: IRentCarRepository,
+    private carRepository: ICarRepository,
+    private userRepository: IUserRepository
   ) {}
 
   async execute(data: IRentCarDTO) {
-    const carAlreadyRented = await this.rentCarRepository.getRentedCar(data.car_id)
+    const car = await this.carRepository.getCarById(data.car_id)
 
-    if(carAlreadyRented) {
-      throw new Error('Carro já está alugado')
+    const user = await this.userRepository.getUserById(data.user_id)
+
+    if(!car?.available) {
+      throw RentCarError.CarAlreadyRentedError()
+    }
+
+    if(!user) {
+      throw RentCarError.UserNotFoundError()
     }
 
     const rentCar = new RentCar(

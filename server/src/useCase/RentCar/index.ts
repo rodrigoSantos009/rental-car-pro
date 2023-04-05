@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
-import { userUseCase } from "../User";
-import { carUseCase } from "../Car";
+import { userRepository, userUseCase } from "../User";
+import { carRepository, carUseCase } from "../Car";
 
 import { RentCarRepository } from "../../repositories/implements/rentCarRepository";
 import { RentCarController } from "./rentCarController";
@@ -14,13 +14,13 @@ const rentCarRepository = new RentCarRepository(
 )
 
 const rentCarUseCase = new RentCarUseCase(
-  rentCarRepository  
+  rentCarRepository,
+  carRepository,
+  userRepository
 )
 
 const rentCarController  = new RentCarController(
   rentCarUseCase,
-  userUseCase,
-  carUseCase
 )
 
 export { rentCarUseCase, rentCarController }

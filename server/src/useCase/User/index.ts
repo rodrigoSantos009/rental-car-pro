@@ -17,4 +17,4 @@ const userController  = new UserController(
   userUseCase  
 )
 
-export { userUseCase, userController }
+export { userUseCase, userController, userRepository }

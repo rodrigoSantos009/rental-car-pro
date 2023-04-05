@@ -1,3 +1,4 @@
+import { CarError } from "../../errors/CarErrors/CarError";
 import { Car } from "../../entities/Car";
 import { ICarRepository } from "../../repositories/ICarRepository";
 import { ICarDTO } from "./carDTO";
@@ -11,7 +12,7 @@ export class CarUseCase {
     const carAlreadyExists = await this.carRepository.getCarByModel(data.model)
 
     if(carAlreadyExists) {
-      throw new Error('Carro já existe')
+      throw CarError.CarAlreadyExists()
     }
 
     const car = new Car(
@@ -26,26 +27,40 @@ export class CarUseCase {
     await this.carRepository.saveCar(car)
   }
   async addImageToCar(image: string, carId: string): Promise<void> {
+    const carExists = await this.carRepository.getCarById(carId)
+
+    if(!carExists) {
+      throw CarError.CarNotFound()
+    }
+
     await this.carRepository.addImageToCar(image, carId)
   }
 
-  async getCarByModel(model: string) {
-    if(!model) {
-      console.log('Error')
+  async getCarByModel(model: string): Promise<Car | null> {
+    const car =  await this.carRepository.getCarByModel(model)
+
+    if(!car) {
+      throw CarError.CarNotFound()
     }
 
-    await this.carRepository.getCarByModel(model)
+    return car
   }
 
 
-  async getCars() {
+  async getCars(): Promise<Car[]> {
     const cars = await this.carRepository.getCars()
 
     return cars
   }
 
   async getCarById(id: string): Promise<Car | null> {
-    return await this.carRepository.getCarById(id)
+    const car = await this.carRepository.getCarById(id)
+
+    if(!car) {
+      throw CarError.CarNotFound()
+    }
+
+    return car
   }
 
   async deleteCar(id: string) {

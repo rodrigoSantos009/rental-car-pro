@@ -7,8 +7,7 @@ import { rentCarController } from "./useCase/RentCar";
 
 const router = Router()
 
-// cars 
-
+// -- CAR ROUTES -- //
 router.post('/cars', (req, res) => {
   return carController.handle(req, res)
 })
@@ -29,9 +28,8 @@ router.delete('/cars/:id', (req, res) => {
   return carController.deleteCar(req, res)
 })
 
-// rental cars
-
-router.post('/car/rentals', (req, res) => {
+// -- RENT ROUTES -- //
+router.post('/car/rentals', AuthMiddleware, (req, res, next) => {
   return rentCarController.handle(req, res)
 })
 
@@ -43,7 +41,7 @@ router.get('/car/rentals', (req, res) => {
   return rentCarController.getRentedCars(req, res)
 })
 
-//users
+// -- USER ROUTES -- //
 
 router.post('/users', (req, res) => {
   return userController.handle(req, res)
@@ -61,9 +59,7 @@ router.get('/user/:id', (req, res) => {
   return userController.getUserById(req, res)
 })
 
-//router.use(AuthMiddleware)
-
-router.get('/users/perfil', (req, res) => {
+router.get('/users/perfil', AuthMiddleware, (req, res, next) => {
   return userController.getPerfil(req, res)
 })
 

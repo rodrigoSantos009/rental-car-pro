@@ -14,7 +14,7 @@ export const AuthMiddleware = async (
   const { authorization } = req.headers
 
   if(!authorization) {
-      throw new Error('Não autorizado')
+    throw new Error('Não autorizado')
   }
 
   const token = authorization.split(' ')[1]
@@ -24,7 +24,7 @@ export const AuthMiddleware = async (
   const user = await userUseCase.getUserByEmail(email)
 
   if(!user) {
-      throw new Error('Não autorizado')
+    throw new Error('Não autorizado')
   }
 
   const { password:_, ...loggedUser } = user

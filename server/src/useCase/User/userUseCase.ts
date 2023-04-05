@@ -1,3 +1,4 @@
+import { UserError } from "../../errors/userErrors/UserError";
 import { User } from "../../entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
 import { IUserDTO } from "./userDTO";
@@ -14,7 +15,7 @@ export class UserUseCase {
     const userAlreadyExists = await this.userRepository.getUserByEmail(data.email)
 
     if(userAlreadyExists) {
-      throw new Error('Usuário já existe')
+      throw UserError.UserAlreadyExists()
     }
 
     const hashPassword = await bcrypt.hash(data.password, 10)
@@ -38,13 +39,13 @@ export class UserUseCase {
     const user = await this.userRepository.getUserByEmail(email)
 
     if(!user) {
-      throw new Error('Email ou senha inválidos!')
-    }
+      throw UserError.UserNotFound()
+    } 
 
     const passwordMatch = await this.comparePassword(password, user.password)
 
     if(!passwordMatch) {
-      throw new Error('Email ou senha inválidos!')
+      throw UserError.UserNotFound()
     } 
 
     const token = jwt.sign({ email: user.email }, process.env.JWT_PASS ?? '', {expiresIn: '8h'})
@@ -53,11 +54,23 @@ export class UserUseCase {
   }
 
   async getUserByEmail(email: string) {
-    return await this.userRepository.getUserByEmail(email)
+    const user = await this.userRepository.getUserByEmail(email)
+
+    if(!user) {
+      throw UserError.UserNotFound()
+    }
+
+    return user
   }
 
   async getUserById(id: string): Promise<User | null> {
-    return await this.userRepository.getUserById(id)
+    const user =  await this.userRepository.getUserById(id)
+
+    if(!user) {
+      throw UserError.UserNotFound()
+    }
+
+    return user
   }
 
   async getUsers() {

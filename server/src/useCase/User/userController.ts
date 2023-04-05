@@ -33,7 +33,8 @@ export class UserController {
 
       return res.status(200).json(userAuthenticate)
     } catch(e) {
-      return res.status(400).json
+      console.error(e)
+      return res.status(400).json({ e })
     }
   }
 

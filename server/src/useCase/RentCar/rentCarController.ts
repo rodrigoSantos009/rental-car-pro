@@ -1,15 +1,10 @@
 import { Request, Response } from "express";
-import { CarUseCase } from "useCase/Car/carUseCase";
-import { UserUseCase } from "useCase/User/userUseCase";
 import { RentCarUseCase } from "./rentCarUseCase";
 
-type ImageFile = string
 
 export class RentCarController {
   constructor(
     private rentCarUseCase: RentCarUseCase,
-    private userUseCase: UserUseCase,
-    private carUseCase: CarUseCase
   ) {}
 
   async handle(req: Request, res: Response): Promise<Response> {
@@ -19,17 +14,6 @@ export class RentCarController {
       user_id,
       car_id 
     } = req.body
-
-    const user = await this.userUseCase.getUserById(user_id)
-    const car = await this.carUseCase.getCarById(car_id)
-
-    if (!car?.available) {
-        throw new Error('Carror não disponível');
-      }
-
-    if (!user) {
-      throw new Error('User not found');
-    }
 
     try {
       const rental = await this.rentCarUseCase.execute({
@@ -41,7 +25,8 @@ export class RentCarController {
 
     return res.status(201).json(rental)
     } catch(e) {
-      return res.status(400).json()
+      console.error(e)
+      return res.status(400).json(e)
     }
   }  
 

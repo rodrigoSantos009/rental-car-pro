@@ -17,4 +17,4 @@ export const carController  = new CarController(
   carUseCase  
 )
 
-export { carUseCase }
+export { carUseCase, carRepository }
