@@ -11,6 +11,9 @@ module.exports = {
         },
         purple: {
           "100": "#2d3748"
+        },
+        orange: {
+          "100": "#FF4D30"
         }
       }
     },

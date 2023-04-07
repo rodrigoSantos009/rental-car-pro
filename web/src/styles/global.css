@@ -1,10 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;  
+@layer components {
 
-.login-main {
-  background: url('/main-car.png') no-repeat;
-  background-size: cover
+  /* HEADER */
+  .header {
+    @apply w-5/6 m-auto py-7 flex justify-between items-center
+  }
+
+  .nav {
+    @apply flex gap-4 font-bold
+  }
+
+  .btn-signin {
+    @apply bg-orange-100 px-7 py-3 rounded-sm text-base text-white font-bold
+  }
+
+    /* MAIN */
+  .main {
+    @apply w-full mt-12 flex justify-around items-center
+  }
+
+  .main p {
+    @apply mt-7 font-medium text-gray-500 text-base
+  }
+
+  .btn-rent {
+    @apply bg-orange-100 text-white p-4 font-bold rounded-sm flex items-center
+  }
+
+  .btn-schedule {
+    @apply bg-black text-white p-4 font-bold rounded-sm flex items-center
+  }
+
+  /* CONTENT BOX */
+  .content {
+    @apply w-full h-80 flex flex-col justify-center mt-32 mb-32 p-10 rounded-sm shadow-lg
+  }
+
+  .icon {
+    @apply text-orange-100 text-xl
+  }
+
+  .content label {
+    @apply text-base font-semibold mb-4 flex items-center
+  }
+
+  .content select {
+    @apply bg-zinc-200 p-3 border border-zinc-300 rounded-sm text-zinc-500 font-medium
+  }
+
+  .content input {
+    @apply border border-zinc-300 text-zinc-500
+  }
+
+  .btn-search {
+    @apply w-full h-full bg-orange-100 text-white text-lg font-bold rounded-sm flex items-center justify-center
+  }
 }
 
 .login-title {
@@ -17,8 +69,7 @@
 }
 
 .form-login {
-  width: 350px;
-  height: 215px;
+  width: 400px;
 }
 
 .cars {

@@ -1,10 +1,16 @@
+import loginCar from '../public/loginCar.jpg'
+
 export function Login() {
   return (
-    <div className="w-full h-full flex">
-      <div className="w-1/2 h-full login-main">
-        
+    <div className="w-5/6 m-auto flex justify-between mt-12">
+      <div>
+        <img 
+          width={680}
+          src={loginCar} 
+          alt="" 
+        />
       </div>
-      <div className="w-1/2 h-full flex flex-col items-center justify-center">
+      <div className="flex flex-col p-4">
         <h1 className="login-title mb-3">Entre em sua conta</h1>
         <form action="" className="form-login">
           <div className="mb-7 flex flex-col">
@@ -24,8 +30,8 @@ export function Login() {
             <a href="#">Esqueceu a senha?</a>
           </div>
           <div className="flex flex-col mt-3">
-            <button className="bg-green-400 text-white mb-3 rounded-md p-2">Entrar</button>
-            <button className="bg-purple-100 text-white rounded-md p-2">Cadastre-se</button>
+            <button className="bg-orange-100 text-white mb-3 rounded-sm p-2 font-bold">Entrar</button>
+            <button className="bg-black text-white rounded-sm p-2 font-bold">Cadastre-se</button>
           </div>
         </form>
       </div>
