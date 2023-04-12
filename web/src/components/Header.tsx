@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export function Header() {
   return (
     <div className="header">
-      <div className="logo">
+      <div className="logo hidden">
         <Link to="/">
           <img 
           width={145}
@@ -14,7 +14,7 @@ export function Header() {
         />
         </Link>
       </div>
-      <div className="nav">
+      <div className="nav hidden">
         <ul className="nav">
             <Link to={"/"}>
               <li><a>Home</a></li>
@@ -33,19 +33,21 @@ export function Header() {
             </Link>
         </ul>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 hidden">
         <Link to={"login"}>
           <button 
-          className="font-bold"
+          className="btn-signin"
           >
            Sign In
           </button>
         </Link>
-        <button 
-          className="btn-signin"
+        <Link to={"register"}>
+          <button 
+          className="btn-register"
         >
           Register
         </button>
+        </Link>
       </div>
     </div>  
   )

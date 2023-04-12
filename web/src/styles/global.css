@@ -5,37 +5,61 @@
 
   /* HEADER */
   .header {
-    @apply w-5/6 m-auto py-7 flex justify-between items-center
+    @apply w-5/6 m-auto py-7 md:flex justify-between items-center 
   }
 
   .nav {
-    @apply flex gap-4 font-bold
+    @apply flex gap-4 font-bold md:flex justify-center items-center
   }
 
   .btn-signin {
+    @apply py-3 text-base font-bold
+  }
+
+  .btn-register {
     @apply bg-orange-100 px-7 py-3 rounded-sm text-base text-white font-bold
   }
 
-    /* MAIN */
+  /* MAIN */
   .main {
-    @apply w-full mt-12 flex justify-around items-center
+    @apply w-full mt-12 flex items-center
   }
 
-  .main p {
-    @apply mt-7 font-medium text-gray-500 text-base
+  .plan {
+    @apply text-center font-bold text-2xl md:text-left
+  }
+
+  .title {
+    @apply text-4xl text-center font-bold md:text-5xl md:text-left
+  }
+
+  .paragraph {
+    @apply text-center mt-7 font-medium text-gray-500 text-base md:text-left
   }
 
   .btn-rent {
-    @apply bg-orange-100 text-white p-4 font-bold rounded-sm flex items-center
+    @apply flex-grow bg-orange-100 text-white p-4 font-bold rounded-sm flex items-center justify-center md:flex-grow-0
   }
 
   .btn-schedule {
-    @apply bg-black text-white p-4 font-bold rounded-sm flex items-center
+    @apply flex-grow bg-black text-white p-4 font-bold rounded-sm flex items-center justify-center md:flex-grow-0
+  }
+
+  .image-main {
+    @apply hidden md:inline
+  }
+
+  .buttons-main {
+    @apply flex justify-between md:justify-start mt-7 gap-3
   }
 
   /* CONTENT BOX */
   .content {
-    @apply w-full h-80 flex flex-col justify-center mt-32 mb-32 p-10 rounded-sm shadow-lg
+    @apply w-full h-auto p-5 flex flex-col justify-center mt-32 mb-32 rounded-sm shadow-lg
+  }
+
+  .content-box-form {
+    @apply grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3
   }
 
   .icon {
@@ -55,22 +79,117 @@
   }
 
   .btn-search {
-    @apply w-full h-full bg-orange-100 text-white text-lg font-bold rounded-sm flex items-center justify-center
+    @apply w-full h-16 lg:h-full bg-orange-100 text-white text-lg font-bold rounded-sm flex items-center justify-center
+  }
+
+  /* PLAN TRIP */
+  .plan-section {
+    @apply flex flex-col items-center mt-16
+  }
+
+  .plan-section h2 {
+    @apply text-center text-2xl font-semibold mb-3
+  }
+
+  .plan-section h1 {
+    @apply text-center text-4xl font-extrabold mb-3 
+  }
+
+  .plan-boxes {
+    @apply mt-16 gap-8 lg:flex
+  }
+
+  .plan-boxes-box {
+    @apply w-96 h-80 flex flex-col items-center
+  }
+
+  .plan-boxes-box h3 {
+    @apply text-xl text-center font-extrabold mb-5
+  }
+
+  .plan-boxes-box p {
+    @apply w-72 text-center text-gray-500 text-base
+  }
+
+  /* PICK CAR */
+  .pick-car {
+    @apply mt-16 mb-16 
+  }
+
+  .pick-car-title {
+    @apply text-center
+  }
+
+  .pick-car-title h2 {
+    @apply text-2xl font-semibold mb-3
+  }
+
+  .pick-car-title h1 {
+    @apply text-4xl font-extrabold mb-3
+  }
+
+  .pick-car-title p {
+    @apply text-gray-500 text-base mt-5 mb-16
+  }
+
+  .pick-container {
+    @apply flex justify-between items-center relative
+  }
+
+  .pick-container h3 {
+    @apply text-lg font-bold
+  }
+
+  .pick-container p {
+    @apply text-gray-500 text-base
+  }
+
+  .pick-container-car {
+    @apply flex flex-col justify-between items-center text-center brightness-75
+  }
+
+  .main-car {
+    @apply w-60 md:w-[300px] m-auto
+  }
+
+  .main-car img {
+    @apply m-auto md:w-[300px]
+  }
+
+  .left, .right {
+    @apply hidden lg:block
+  }
+
+  .pick-container-car-prev {
+    @apply hidden text-2xl rounded-full p-2 border border-zinc-600 cursor-pointer
+  }
+
+  .pick-container-car-next {
+    @apply hidden text-2xl rounded-full p-2 border border-zinc-600 cursor-pointer
+  } 
+
+  /* LOGIN */
+  .login-card {
+    @apply flex items-center justify-center mt-12
+  }
+
+  .login-image {
+    @apply hidden
+  }
+
+  .login-card-form {
+    @apply flex flex-col p-4
+  }
+
+  .login-title {
+    @apply mb-3  text-2xl text-center font-bold md:text-left
+  }
+
+  .form-login {
+    @apply w-96;
   }
 }
 
-.login-title {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
-  color: #1A202C;
-}
-
-.form-login {
-  width: 400px;
-}
 
 .cars {
   border: 1px solid rgba(128, 128, 128, 0.368);

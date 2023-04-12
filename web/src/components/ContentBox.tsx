@@ -6,8 +6,8 @@ export function ContentBox() {
   return (
     <div className="content">
       <h1 className="text-3xl font-bold mb-5">Escolha seu carro</h1>
-      <div className="w-full">
-        <form className="grid grid-cols-3 gap-2">
+      <div className="w-full content-box">
+        <form className="content-box-form">
           <div className="flex flex-col">
             <label>
               <AiFillCar className="icon"/> &nbsp; 
