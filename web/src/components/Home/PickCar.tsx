@@ -49,11 +49,11 @@ export function PickCar() {
               src={slides[currentIndex].url} 
               alt="" 
             />  
-            <div className="w-[360px] flex justify-between absolute top-[20%] -translate-x-0 traslate-y-[50%]">
+            <div  onClick={prevSlide} className="w-[360px] flex justify-between absolute top-[20%] -translate-x-0 traslate-y-[50%]">
               <div className="pick-container-car-prev group-hover:block">
-              <BsChevronCompactLeft onClick={prevSlide} size={30} />
+              <BsChevronCompactLeft size={30} />
             </div>
-            <div className="pick-container-car-next group-hover:block">
+            <div  onClick={prevSlide} className="pick-container-car-next group-hover:block">
               <BsChevronCompactRight onClick={nextSlide} size={30} />
             </div>
             </div>

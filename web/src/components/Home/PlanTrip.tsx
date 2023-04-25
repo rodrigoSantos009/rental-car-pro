@@ -1,6 +1,6 @@
-import selectCar from "../public/icon1.png"
-import Contact from "../public/icon2.png"
-import Drive from "../public/icon3.png"
+import selectCar from "../../public/icon1.png"
+import Contact from "../../public/icon2.png"
+import Drive from "../../public/icon3.png"
 
 export function PlanTrip() {
   return (

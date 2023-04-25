@@ -1,7 +1,7 @@
-import { Main } from "../components/Main";
-import { ContentBox } from "../components/ContentBox";
-import { PlanTrip } from "../components/PlanTrip";
-import { PickCar } from "../components/PickCar";
+import { Main } from "../components/Home/Main";
+import { ContentBox } from "../components/Home/ContentBox";
+import { PlanTrip } from "../components/Home/PlanTrip";
+import { PickCar } from "../components/Home/PickCar";
 
 export function Home() {
   return (

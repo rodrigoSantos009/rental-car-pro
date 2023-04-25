@@ -73,7 +73,7 @@ export class CarController {
   async getCars(req: Request, res: Response) {
     try {
       const cars = await this.carUseCase.getCars()
-
+      
       return res.status(200).json(cars)
     } catch(e) {
       return res.status(400).json()

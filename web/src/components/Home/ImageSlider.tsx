@@ -1,9 +1,8 @@
-import mainCar from "../public/main-car.png"
-import groupG from "../public/grupoG.png"
-import groupL from "../public/groupL.png"
-import groupM from "../public/GroupM.png"
-import groupA from "../public/groupA.png"
-import groupB from "../public/groupB.png"
+import groupG from "../../public/grupoG.png"
+import groupL from "../../public/groupL.png"
+import groupM from "../../public/GroupM.png"
+import groupA from "../../public/groupA.png"
+import groupB from "../../public/groupB.png"
 
 export const slides = [
   {

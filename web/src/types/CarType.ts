@@ -5,7 +5,7 @@ export type CarsInfo = {
   doors: number
   passengers: number
   rentalPrice: number
-  avaiable: boolean
+  available: boolean
   car_image: {
     url: string
   }

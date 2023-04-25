@@ -18,3 +18,33 @@
     </div>
   ))}
 </div>
+
+
+  
+
+
+<div className="flex items-center">
+          <button onClick={handleMenu} className="cursor-pointer">
+            {open ? <IoMdMenu className="text-2xl" /> : <IoMdClose className="text-2xl" />}
+          </button>
+        </div>
+
+
+
+<div className="flex gap-4">
+    <Link to={"login"}>
+      <button 
+      className="btn-signin hidden"
+      >
+        Entrar
+      </button>
+    </Link>
+    <Link to={"register"}>
+      <button 
+      className="btn-register hidden"
+    >
+      Registre-se
+    </button>
+    </Link>
+    
+</div>

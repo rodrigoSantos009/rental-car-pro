@@ -5,21 +5,22 @@
 
   /* HEADER */
   .header {
-    @apply w-5/6 m-auto py-7 md:flex justify-between items-center 
+    @apply w-5/6 m-auto py-7 justify-between items-center hidden md:flex
   }
 
   .nav {
-    @apply flex gap-4 font-bold md:flex justify-center items-center
-  }
-
-  .btn-signin {
-    @apply py-3 text-base font-bold
+    @apply gap-4 font-bold md:flex justify-center items-center
   }
 
   .btn-register {
     @apply bg-orange-100 px-7 py-3 rounded-sm text-base text-white font-bold
   }
 
+  /* MOBILE HEADER */
+  .header-mobile {
+    @apply w-5/6 m-auto py-7 justify-between items-center flex md:hidden
+  }
+  
   /* MAIN */
   .main {
     @apply w-full mt-12 flex items-center
@@ -173,10 +174,6 @@
     @apply flex items-center justify-center mt-12
   }
 
-  .login-image {
-    @apply hidden
-  }
-
   .login-card-form {
     @apply flex flex-col p-4
   }
@@ -186,15 +183,22 @@
   }
 
   .form-login {
-    @apply w-96;
+    @apply w-72 md:w-96;
   }
-}
 
+  /* CAR MODELS */
+  .models {
+    @apply w-5/6 mx-auto
+  }
 
-.cars {
-  border: 1px solid rgba(128, 128, 128, 0.368);
-}
+  .models-car {
+    @apply w-full gap-5 rounded-sm grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-12
+  }
+  .cars {
+    @apply w-auto sm:w-[300px] h-[450px] md:w-[320px] p-5 rounded-lg flex flex-col items-center justify-center shadow-xl mx-auto
+  }
 
-.image {
-  border: 1px solid rgba(128, 128, 128, 0.368);
-}
+  .models-button {
+    @apply w-full h-10 text-center text-white font-normal bg-orange-100 rounded-sm
+  }
+} 

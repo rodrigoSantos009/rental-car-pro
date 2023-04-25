@@ -43,11 +43,11 @@ router.get('/car/rentals', (req, res) => {
 
 // -- USER ROUTES -- //
 
-router.post('/users', (req, res) => {
+router.post('/signup', (req, res) => {
   return userController.handle(req, res)
 })
 
-router.get('/users/login', (req, res) => {
+router.post('/signin', (req, res) => {
   return userController.authenticate(req, res)
 })
 
@@ -59,7 +59,7 @@ router.get('/user/:id', (req, res) => {
   return userController.getUserById(req, res)
 })
 
-router.get('/users/perfil', AuthMiddleware, (req, res, next) => {
+router.get('/perfil', AuthMiddleware, (req, res, next) => {
   return userController.getPerfil(req, res)
 })
 
