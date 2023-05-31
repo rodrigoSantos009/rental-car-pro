@@ -67,7 +67,7 @@ export class UserUseCase {
     const user =  await this.userRepository.getUserById(id)
 
     if(!user) {
-      throw UserError.UserNotFound()
+      throw new Error("Usuário não encontrado!")
     }
 
     return user

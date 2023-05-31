@@ -40,7 +40,6 @@ export class UserController {
 
   async getPerfil(req: Request, res: Response) {
     try {
-      console.log(req.user)
       return res.status(200).json(req.user)
     } catch(e) {
       return res.status(400).json()
@@ -53,7 +52,7 @@ export class UserController {
 
       return res.status(200).json(users)
     } catch(e) {
-      return res.status(401).json()
+      return res.status(400).json()
     }
   }
 

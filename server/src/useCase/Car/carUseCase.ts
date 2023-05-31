@@ -46,7 +46,6 @@ export class CarUseCase {
     return car
   }
 
-
   async getCars(): Promise<Car[]> {
     const cars = await this.carRepository.getCars()
 

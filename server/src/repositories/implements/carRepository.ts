@@ -53,6 +53,9 @@ export class CarRepository implements ICarRepository {
     return await this.prisma.car.findUnique({
       where: {
         id
+      },
+      include: {
+        car_image: true
       }
     })
   }

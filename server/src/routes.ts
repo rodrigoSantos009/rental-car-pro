@@ -55,7 +55,7 @@ router.get('/users', (req, res) => {
   return userController.getUsers(req, res)
 })
 
-router.get('/user/:id', (req, res) => {
+router.get('/users/:id', (req, res) => {
   return userController.getUserById(req, res)
 })
 

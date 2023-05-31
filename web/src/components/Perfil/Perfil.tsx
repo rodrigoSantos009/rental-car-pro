@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { api } from "../../lib/axios"
-import { IconContext } from "react-icons/lib"
-import { AuthContext } from "../../contexts/Auth/Index"
 import { useAuth } from "../../contexts/Auth/UseAuth"
 
 type UserProps = {
@@ -13,26 +11,34 @@ export function Perfil() {
   const [user, setUser] = useState<UserProps>({
     name: "",
     email: ""
-  })
+  }) 
+  const [authenticated, setAuthenticated] = useState(false)
 
   const { token } = useAuth()
 
   useEffect(() => {
-    api
+      api
       .get("/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        
       })
       .then((res) => {
+        setAuthenticated(true)
         setUser(res.data);
-      });
+      })
   }, [])
 
   return (
     <div>
-      <p>Name: {user.name}</p>
-      <p>Email: {user.email}</p>
+      {authenticated ? (
+        <div>
+          <p>Name: {user.name}</p>
+          <p>Email: {user.email}</p>
+        </div>
+      ) : 
+      (null)}
     </div>
   );
 }

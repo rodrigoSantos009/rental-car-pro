@@ -24,7 +24,7 @@ export function Header() {
           <Link to={"models"}>Modelos de Veículos</Link>
         </ul>
       </div>
-      {!auth.email ? (
+      {!auth.token ? (
         <div className="gap-4 hidden md:flex">
           <Link to={"login"}>
             <button className="btn-signin md:py-3 md:text-base md:font-bold">

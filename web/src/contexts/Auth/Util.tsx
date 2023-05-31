@@ -30,9 +30,9 @@ export async function SignupRequest(name: string, email: string, password: strin
 export async function LoginRequest(email: string, password: string) {
   try {
     const request = await api.post("/signin", { email, password });
-    
     return request.data
   } catch(e) {
-    return null
+    console.log(e)
+    return 
   }
 }

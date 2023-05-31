@@ -1,31 +1,49 @@
-import { Link, useNavigate } from 'react-router-dom'
-import {  useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import { useAuth } from '../../contexts/Auth/UseAuth';
+import { useAuth } from "../../contexts/Auth/UseAuth";
 
 export function Login() {
+  const LOGIN_URL = "http://localhost:5173/login";
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
-  const auth = useAuth()
-
+  const auth = useAuth();
 
   async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    try {
-      await auth.authenticate(email, password);
+    event.preventDefault();
 
-      navigate("/models");
-    } catch (e) {
-      console.error("Email ou senh inválidos", e);
+    if (!email || !password) {
+      return;
     }
-  };
+
+    try {
+      const success = await auth.authenticate(email, password);
+      if (success) {
+        if (window.location.href === LOGIN_URL) navigate("/");
+        window.location.href;
+      }
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    } catch (e) {
+      console.log("Faild", email, password);
+      console.log("Email ou senha inválidos", e);
+    }
+  }
 
   return (
     <div className="login-card">
       <div className="login-card-form">
+        {error ? (
+          <div className="text-center mb-10 p-2 text-white font-bold bg-red-500">
+            Email ou senha incorretos!
+          </div>
+        ) : null}
         <h1 className="login-title">Entre em sua conta</h1>
         <form onSubmit={handleLogin} className="form-login">
           <div className="mb-7 flex flex-col">
@@ -37,7 +55,9 @@ export function Login() {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="Digite seu email..."
-              className="border-2 border-zinc-300 focus:border-orange-100 p-2 rounded-md outline-none"
+              className={`border-2 focus focus:border-orange-100 p-2 rounded-md outline-none ${
+                error ? "border-red-600" : "border-zinc-300"
+              }`}
             />
           </div>
           <div className="flex flex-col">
@@ -49,7 +69,9 @@ export function Login() {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               placeholder="Digite sua senha..."
-              className="border-2 border-zinc-300 focus:border-orange-100 p-2 rounded-md outline-none"
+              className={`border-2 focus:border-orange-100 p-2 rounded-md outline-none ${
+                error ? "border-red-600" : "border-zinc-300"
+              }`}
             />
           </div>
           <div className="flex justify-between mt-5">
