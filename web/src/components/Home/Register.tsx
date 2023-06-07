@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../../lib/axios'
 
 export function Register() {
@@ -73,11 +73,6 @@ export function Register() {
             >
               Cadastre-se
             </button>
-            <Link to={"/login"}>
-              <button className="w-full bg-black text-white rounded-sm p-2 font-bold">
-                Entrar
-              </button>
-            </Link>
           </div>
         </form>
       </div>

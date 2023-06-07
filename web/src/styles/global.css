@@ -12,10 +12,6 @@
     @apply gap-4 font-bold md:flex justify-center items-center
   }
 
-  .btn-register {
-    @apply bg-orange-100 px-7 py-3 rounded-sm text-base text-white font-bold
-  }
-
   /* MOBILE HEADER */
   .header-mobile {
     @apply w-5/6 m-auto py-7 justify-between items-center flex md:hidden
@@ -204,7 +200,7 @@
 
   /* RENT CAR */
   .rent-car {
-    @apply w-5/6 mx-auto
+    @apply w-5/6 mx-auto mb-16
   }
 
   .rent-car-car {
@@ -214,11 +210,11 @@
   /* Regitration And Personal Data */
 
   .form {
-    @apply grid grid-cols-3 gap-3
+    @apply w-full grid grid-cols-1  md:grid-cols-2 gap-3 mx-auto
   }
 
   .input-registration-form {
-    @apply border-b border-black outline-none focus:border-orange-100 py-2
+    @apply w-auto border-b border-black outline-none focus:border-orange-100 py-2
   }
 
   .label-registration-form {
@@ -239,7 +235,7 @@
   /* FORM CREDIT CARD */
 
   .credit-card-form {
-    @apply grid grid-cols-4 gap-4 w-2/3
+    @apply w-full grid grid-cols-1 md:grid-cols-4 gap-4 
   }
 
   .input-credit-card-form {
@@ -252,5 +248,9 @@
 
   .card-credit-card {
     @apply w-full h-full flex flex-col justify-between border px-12 py-14 rounded-2xl bg-gradient-to-tr from-blue-700 to-blue-400
+  }
+
+  .perfil-input {
+    @apply w-auto border-b border-black outline-none focus:border-orange-100 py-2
   }
 }   

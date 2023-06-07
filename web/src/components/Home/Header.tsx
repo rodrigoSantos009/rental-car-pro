@@ -4,10 +4,11 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../../contexts/Auth/UseAuth"
 
 export function Header() {
-  const auth = useAuth()
+  const {logout, token, name} = useAuth()
+  
 
   function handleLogout() {
-    auth.logout()
+    logout()
   }
 
   return (
@@ -20,19 +21,15 @@ export function Header() {
       <div className="nav">
         <ul className="nav">
           <Link to={"/"}>Home</Link>
-          <Link to={"about"}>Sobre</Link>
           <Link to={"models"}>Modelos de Veículos</Link>
         </ul>
       </div>
-      {!auth.token ? (
-        <div className="gap-4 hidden md:flex">
+      {!token ? (
+        <div className="hidden md:flex">
           <Link to={"login"}>
             <button className="btn-signin md:py-3 md:text-base md:font-bold">
               Entrar
             </button>
-          </Link>
-          <Link to={"register"}>
-            <button className="btn-register">Registre-se</button>
           </Link>
         </div>
       ) : (
@@ -44,7 +41,7 @@ export function Header() {
           </Link>
 
           <Link to={"/perfil"}>
-            <button>Perfil</button>
+            <button>{name}</button>
           </Link>
         </div>
       )}

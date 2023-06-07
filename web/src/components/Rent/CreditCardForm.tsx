@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 export function CreditCardForm() {
-  const [creditCardNumber, setCreditCardNumber] = useState("***********")
-  const [creditCardValidity, setCreditCardValidity] = useState("****")
-  const [creditCardOwner, setCreditCardOwner] = useState("********************")
+  const [creditCardNumber, setCreditCardNumber] = useState("")
+  const [creditCardValidity, setCreditCardValidity] = useState("")
+  const [creditCardOwner, setCreditCardOwner] = useState("")
   const [creditCardSecurityCode, setCreditCardSecurityCard] = useState("")
 
   const handleCreditCardNumber = (
@@ -31,7 +31,7 @@ export function CreditCardForm() {
   return (
     <div className="mt-20">
       <h1>Adicionar cartão de crédito: </h1>
-      <div className="flex mt-4 gap-4 justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-4 ">
         <form className="credit-card-form">
           <div className="col-span-2 flex flex-col">
             <label className="font-semibold">Número do cartão*</label>
@@ -74,13 +74,6 @@ export function CreditCardForm() {
             <input type="text" className="input-credit-card-form" />
           </div>
         </form>
-        <div className="card-credit-card-section">
-          <div className="card-credit-card">
-            <p className="text-center">{creditCardNumber}</p>
-            <p>{creditCardOwner}</p>
-            <p>{creditCardValidity}</p>
-          </div>
-        </div>
       </div>
     </div>
   );

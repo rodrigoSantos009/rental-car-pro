@@ -51,7 +51,7 @@ export const AuthMiddleware = async (
       const accessToken = jwt.sign(
         { email: decoded.email },
         process.env.JWT_PASS ?? "",
-        { expiresIn: "15m" }
+        { expiresIn: "2h" }
       );
 
       res.setHeader("Authorization", `Bearer ${accessToken}`);

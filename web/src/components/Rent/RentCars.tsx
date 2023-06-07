@@ -10,14 +10,15 @@ type RentCarType = {
   price: number
 }
 
-export function RentCarTest() {
+export function RentCars() {
   const location = useLocation()
 
   const [cars, setCars] = useState<CarsInfo>([])
   const [rentDay, setRentDay] = useState(location.state.rentDay)
   const [returnDay, setReturnDay] = useState(location.state.returnDay)
   const [days, setDays] = useState(location.state.totalDays)
-
+  const [pickUp, setPickUp] = useState(location.state.pickUp);
+  const [checkOut, setCheckOut] = useState(location.state.checkOut);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -31,24 +32,26 @@ export function RentCarTest() {
       state: {
         rentDay,
         returnDay,
-        days, 
+        days,
         value: data.price,
+        pickUp,
+        checkOut,
       },
     });
   }
 
   return (
     <div className="rent-car">
-      <div className="w-full flex justify-between gap-3">
-        <div className="flex grow">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-3">
+        <div className="flex col-span-2">
           <div className="flex flex-col grow">
             {cars.map((car, index) => (
               <div key={index} className="w-full flex flex-col gap-3 grow">
-                <div className="flex border border-gray-100 p-2 mb-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 border border-gray-100 p-2 mb-2">
                   <div className="rent-car-car">
                     {car.car_image && (
                       <img
-                        src={`http://localhost:3000/uploads/${car.car_image.url}`}
+                        src={`http://localhost:3333/uploads/${car.car_image.url}`}
                         alt={car.model}
                         className="image"
                       />
@@ -73,7 +76,7 @@ export function RentCarTest() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col grow gap-3 font-semibold">
+                  <div className="flex flex-col col-span-1 gap-3 font-semibold">
                     <div
                       onClick={() =>
                         handleSelect({
@@ -97,8 +100,8 @@ export function RentCarTest() {
             ))}
           </div>
         </div>
-        <div className="w-[22%] flex flex-col grow rounded-t-md">
-          <div className="flex flex-col grow rounded-md border border-gray-100 relative">
+        <div className="flex flex-col grow rounded-t-md col-span-1">
+          <div className="flex flex-col grow rounded-md border border-gray-100">
             <div className="text-white bg-gray-300 h-14 text-center">
               <h1 className="w-full h-full flex justify-center items-center text-orange-100 font-bold text-xl">
                 Resumo da Reserva
@@ -108,15 +111,15 @@ export function RentCarTest() {
             <div className="px-7 p-5">
               <h2 className="text-orange-100 font-bold text-lg">Retirada</h2>
               <p>{rentDay} às 08:00</p>
-              <p>Agencia Centro São Bento do Sul</p>
+              <p>{pickUp}</p>
             </div>
             <hr className="w-[90%] mx-auto" />
             <div className="px-7 p-5">
               <h2 className="text-orange-100 font-bold text-lg">Devolução</h2>
               <p>{returnDay} às 08:00</p>
-              <p>Agencia Centro São Bento do Sul</p>
+              <p>{checkOut}</p>
             </div>
-            <hr className="w-[90%] mx-auto" />  
+            <hr className="w-[90%] mx-auto" />
           </div>
         </div>
       </div>

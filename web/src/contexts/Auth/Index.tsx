@@ -4,17 +4,16 @@ import { GetUserGetStorage, LoginRequest, SetUserLocalStorage, SignupRequest } f
 
 export const AuthContext = createContext<IContext>({} as IContext)
 
-export const AuthProvider = ({ children }: IAuthProvider) => {
+export const  AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<IUserSignin | null>(null);
-
+  
   useEffect(() => {
     const user = GetUserGetStorage()
-
     if(user) {
       setUser(user)
+      
     }
   }, [])
-
   async function signup(name: string, email: string, password: string) {
     return await SignupRequest(name, email, password)
   }
@@ -22,8 +21,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   async function authenticate(email: string, password: string) {
     try {
       const response = await LoginRequest(email, password)
+      
       if(response) {
-        const payload = { token: response, email };
+        const payload = { token: response.token, name: response.user.name, email };
         setUser(payload);
         SetUserLocalStorage(payload)
         return true

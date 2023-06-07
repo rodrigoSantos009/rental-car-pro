@@ -28,6 +28,8 @@ export function RentCar() {
   const [returnDay, setReturnDay] = useState(location.state.returnDay);
   const [days, setDays] = useState(location.state.days);
   const [value, setValue] = useState(location.state.value);
+  const [pickUp, setPickUp] = useState(location.state.pickUp);
+  const [checkOut, setCheckOut] = useState(location.state.checkOut);
    
   const totalValue = days * value 
   const amountInInstallments = totalValue / 6
@@ -41,20 +43,22 @@ export function RentCar() {
         returnDay,
         model,
         totalValue,
-        amountInInstallments
-      }
+        amountInInstallments,
+        pickUp,
+        checkOut,
+      },
     });
   }
-  
+    
   return (
     <div className="rent-car">
-      <div className="w-full flex justify-between gap-3">
-        <div className="flex flex-col gap-3 grow">
-          <div className="flex border border-gray-100 p-2">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-3">
+        <div className="col-span-2 flex flex-col gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 border border-gray-100 p-2">
             <div className="rent-car-car">
               {car?.car_image && (
                 <img
-                  src={`http://localhost:3000/uploads/${car?.car_image.url}`}
+                  src={`http://localhost:3333/uploads/${car?.car_image.url}`}
                 />
               )}
               <div className="text-center">
@@ -93,13 +97,14 @@ export function RentCar() {
           </div>
           <div className="flex justify-end">
             <button
-               onClick={() => handleFinish(car!.model)}
-               className="bg-orange-100 px-6 py-2 text-white font-semibold rounded-md">
+              onClick={() => handleFinish(car!.model)}
+              className="bg-orange-100 px-6 py-2 text-white font-semibold rounded-md"
+            >
               Continuar
             </button>
           </div>
         </div>
-        <div className="rounded-md border border-gray-100 flex flex-col grow rounded-t-md">
+        <div className="col-span-1 rounded-md flex flex-col grow">
           <div className="text-white bg-gray-300 h-14 text-center ">
             <h1 className="w-full h-full flex justify-center items-center text-orange-100 font-bold text-xl">
               Resumo da Reserva
@@ -109,13 +114,13 @@ export function RentCar() {
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Retirada</h2>
             <p>{rentDay} às 08:00</p>
-            <p>Agencia Centro São Bento do Sul</p>
+            <p>{pickUp}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Devolução</h2>
             <p>{returnDay} às 08:00</p>
-            <p>Agencia Centro São Bento do Sul</p>
+            <p>{checkOut}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 py-5">

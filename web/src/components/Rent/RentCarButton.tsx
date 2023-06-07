@@ -1,48 +1,57 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ContentBox } from "../Home/ContentBox";
 
 export interface ICarId {
   carId: string
 }
 
 type DataType = {
-  rentDate: string | null,
-  returnDate: string | null
-  days: number | null
-}
+  rentDate: string | null;
+  returnDate: string | null;
+  days: number | null;
+  pickUpCity: string | null;
+  checkOutCity: string | null;
+};
 
-export function RentCarButton({ rentDate, returnDate, days }: DataType) {
+export function RentCarButton({
+  rentDate,
+  returnDate,
+  days,
+  pickUpCity,
+  checkOutCity,
+}: DataType) {
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
+  const [rentDay, setRentDay] = useState(rentDate);
+  const [returnDay, setReturnDay] = useState(returnDate);
+  const [totalDays, setTotalDays] = useState(days);
+  const [pickUp, setPickup] = useState(pickUpCity);
+  const [checkOut, setCheckOut] = useState(checkOutCity);
 
-  const [rentDay, setRentDay] = useState(rentDate)
-  const [returnDay, setReturnDay] = useState(returnDate)
-  const [totalDays, setTotalDays] = useState(days)   
-
-  if(totalDays === 0) setTotalDays(1);
+  if (totalDays === 0) setTotalDays(1);
 
   function handleCarRent() {
-    if(!rentDay || !returnDate) {
-      alert("Escolha as datas antes de continuar!") 
-      navigate("/")
+    if (!rentDay || !returnDate) {
+      alert("Escolha as datas antes de continuar!");
+      navigate("/");
     } else {
-      navigate("/rent/test", {
+      navigate("/rent/cars", {
         state: {
           rentDay,
           returnDay,
           totalDays,
+          pickUp,
+          checkOut,
         },
       });
     }
-    
-  } 
+  }
 
   return (
     <>
       <button className="models-button" onClick={handleCarRent}>
         RESERVE AGORA
-      </button> 
+      </button>
     </>
   );
 }

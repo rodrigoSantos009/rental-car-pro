@@ -25,7 +25,7 @@ export class UserUseCase {
       data.email,
       hashPassword  
     )
-
+    
     await this.userRepository.saveUser(user)
   }
 
@@ -48,9 +48,15 @@ export class UserUseCase {
       throw UserError.UserNotFound()
     } 
 
-    const token = jwt.sign({ email: user.email }, process.env.JWT_PASS ?? '', {expiresIn: '8h'})
+    const token = jwt.sign({ email: user.email }, process.env.JWT_PASS ?? '', {expiresIn: '2h'})
 
-    return token
+    return {
+      token,
+      user: {
+        name: user.name,
+        email: user.email
+      }
+    }
   }
 
   async getUserByEmail(email: string) {

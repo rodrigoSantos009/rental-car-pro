@@ -1,5 +1,4 @@
 import { Home } from './pages/Home'
-import { About } from './pages/About'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './styles/global.css'
 import { MobileHeader } from './components/Home/MobileHeader'
@@ -11,7 +10,7 @@ import { AuthProvider } from './contexts/Auth/Index'
 import { ProtectedLayout } from './components/ProtectedLayout/ProtectedLayout'
 import { Perfil } from './components/Perfil/Perfil'
 import { PageNotFound } from './components/PageNotFound/PageNotFound'
-import { RentCarTest } from './components/Rent/RentCarTest'
+import { RentCars } from './components/Rent/RentCars'
 import { RentCar } from './components/Rent/RentCar'
 import { RegistrationAndPersonalData } from './components/Rent/RegistrationAndPersonalData'
 
@@ -25,11 +24,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/models" element={<Models />} />
-            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path='/rent/test' element={<RentCarTest />} />
+            <Route path='/perfil'
+              element={
+                <ProtectedLayout children={<Perfil />} />
+              }
+            />
+            <Route path='/rent/cars' element={<RentCars />} />
             <Route path="/rent/:carId" element={<RentCar />} />
             <Route
               path="/finish"

@@ -4,17 +4,16 @@ import { CarsInfo } from "../../types/CarType"
 
 import { BsFillPersonFill } from "react-icons/Bs"
 import { RentCarButton } from "../Rent/RentCarButton"
-import { redirect, useLocation, useNavigate } from "react-router-dom"
-import { ContentBox } from "../Home/ContentBox"
+import { useLocation } from "react-router-dom"
 
 export function CarModels() {
   const location = useLocation()
-  const navigate = useNavigate()
-
   const [cars, setCars] = useState<CarsInfo>([])
   const [rentDate, setRentDate] = useState<string>("");
   const [returnDate, setReturnDate] = useState<string>("");
   const [days, setDays] = useState(0)  
+  const [pickUp, setPickup] = useState("")
+  const [checkOut, setCheckOut] = useState("");
 
   useEffect(() => {
     api.get("/cars").then((res) => {
@@ -24,8 +23,10 @@ export function CarModels() {
       setRentDate(location.state.rentDate);
       setReturnDate(location.state.returnDate);
       setDays(location.state.days)
+      setPickup(location.state.pickUp)
+      setCheckOut(location.state.checkOut)
     }
-  }, []);
+  }, []); 
 
   return (
     <div className="models">
@@ -36,7 +37,7 @@ export function CarModels() {
             {car.car_image && (
               <img
                 width={250}
-                src={`http://localhost:3000/uploads/${car.car_image.url}`}
+                src={`http://localhost:3333/uploads/${car.car_image.url}`}
                 alt={car.model}
                 className="image"
               />
@@ -60,6 +61,8 @@ export function CarModels() {
                 rentDate={rentDate}
                 returnDate={returnDate}
                 days={days}
+                pickUpCity={pickUp}
+                checkOutCity={checkOut}
               />
             </div>
           </div>

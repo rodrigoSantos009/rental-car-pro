@@ -5,7 +5,6 @@ export interface IUser {
 }
 
 export interface IUserSignin {
-
   name?: string
   email?: string
   token?: string

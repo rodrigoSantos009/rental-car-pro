@@ -1,4 +1,3 @@
-import { AiFillCar } from "react-icons/ai"
 import { HiLocationMarker, HiOutlineSearch } from "react-icons/hi"
 import { BsCalendar2DateFill } from "react-icons/Bs"
 
@@ -8,6 +7,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export function ContentBox() {
+  const [pickUp, setPickup] = useState("")
+  const [checkOut, setCheckOut] = useState("")
   const [rentDate, setRentDate] = useState(Date)
   const [returnDate, setReturnDate] = useState(Date)
   const navigate = useNavigate();
@@ -21,17 +22,18 @@ export function ContentBox() {
     let hours = formattedReturnDate.diff(formattedRentDate, "hours");
     const days = Math.floor(hours / 24)
     
-    hours = hours - (days * 24)
+    hours = hours - (days * 24)    
 
-    navigate('/models', {
+    navigate("/models", {
       state: {
         rentDate,
         returnDate,
-        days
-      } 
-    }
-    )
-  }
+        days,
+        pickUp,
+        checkOut,
+      },
+    });
+  }  
 
   return (
     <div className="content">
@@ -40,33 +42,22 @@ export function ContentBox() {
         <form className="content-box-form" onSubmit={handleSubmit}>
           <div className="flex flex-col">
             <label>
-              <AiFillCar className="icon" /> &nbsp; Selecione o Modelo do Carro
-            </label>
-            <select>
-              <option>Selecione o modelo do carro</option>
-              <option>Golf GTI</option>
-              <option>Jetta GLI</option>
-              <option>Pajero</option>
-            </select>
-          </div>
-          <div className="flex flex-col">
-            <label>
               <HiLocationMarker className="icon" /> &nbsp; Pick Up
             </label>
-            <select>
+            <select value={pickUp} onChange={(e) => setPickup(e.target.value)}>
               <option>Selecione o local da retirada</option>
-              <option>São Paulo</option>
-              <option>Itajaí</option>
+              <option value={"São Paulo"}>São Paulo</option>
+              <option value={"Itajaí"}>Itajaí</option>
             </select>
           </div>
           <div className="flex flex-col">
             <label>
               <HiLocationMarker className="icon" /> &nbsp; Devolver
             </label>
-            <select>
+            <select value={checkOut} onChange={(e) => setCheckOut(e.target.value)}>
               <option>Selecione o local da devolução</option>
-              <option>São Paulo</option>
-              <option>Itajaí</option>
+              <option value={"São Paulo"}>São Paulo</option>
+              <option value={"Itajaí"}>Itajaí</option>
             </select>
           </div>
           <div className="flex flex-col mt-4">

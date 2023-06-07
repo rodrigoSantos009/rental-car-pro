@@ -1,34 +1,43 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { IoIosInformationCircle } from "react-icons/Io"
 import { Form } from "./Form";
 import { CreditCardForm } from "./CreditCardForm";
  
 export function RegistrationAndPersonalData() {
-
+  const notify = () => toast("Carro alugado com sucesso!");
   const location = useLocation()
-  const navigate = useNavigate()
 
   const [carModel, setCarModel] = useState("")
   const [rentDay, setRentDay] = useState("");
   const [returnDay, setReturnDay] = useState("");
   const [totalValue, setTotalValue] = useState(0);
   const [amountInInstallments, setAmountInInstallments] = useState(0);
+  const [pickUp, setPickUp] = useState("");
+  const [checkOut, setCheckOut] = useState("");
   
-  if(location.state) {
-    setCarModel(location.state.model) 
-    setRentDay(location.state.rentDay) 
-    setReturnDay(location.state.returnDay)
-    setTotalValue(location.state.totalValue)
-    setAmountInInstallments(location.state.amountInInstallments)
-  }
+  useEffect(() => {
+    if (location.state) {
+      setCarModel(location.state.model);
+      setRentDay(location.state.rentDay);
+      setReturnDay(location.state.returnDay);
+      setTotalValue(location.state.totalValue);
+      setAmountInInstallments(location.state.amountInInstallments);
+      setPickUp(location.state.pickUp);
+      setCheckOut(location.state.checkOut)
+    }
+  }, [location])
 
   return (
-    <div className="rent-car mb-40">
-      <div className="w-full grid grid-cols-3 gap-5">
-        <div className="col-span-2">
-          <div className="">
+    <div className="rent-car mb-16">
+      <ToastContainer />
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="md:col-span-1 lg:col-span-2">
+          <div className="mb-4 ">
             <h1 className="text-3xl mb-4">Dados Pessoais</h1>
             <p>Informe seus dados para que possamos efetuar a sua reserva.</p>
           </div>
@@ -48,12 +57,15 @@ export function RegistrationAndPersonalData() {
             <CreditCardForm />
           </div>
           <div className="mt-10">
-            <button className="bg-orange-100 px-6 py-2 text-white font-semibold rounded-md">
+            <button
+              onClick={notify}
+              className="bg-orange-100 px-6 py-2 text-white font-semibold rounded-md"
+            >
               Reservar
             </button>
           </div>
         </div>
-        <div className="rounded-md border border-gray-100 flex flex-col grow rounded-t-md right-32">
+        <div className="col-span-1 rounded-md flex flex-col grow">
           <div className="text-white bg-gray-300 h-14 text-center ">
             <h1 className="w-full h-full flex justify-center items-center text-orange-100 font-bold text-xl">
               Resumo da Reserva
@@ -63,13 +75,13 @@ export function RegistrationAndPersonalData() {
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Retirada</h2>
             <p>{rentDay} às 08:00</p>
-            <p>Agencia Centro São Bento do Sul</p>
+            <p>{pickUp}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Devolução</h2>
             <p>{returnDay} às 08:00</p>
-            <p>Agencia Centro São Bento do Sul</p>
+            <p>{checkOut}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 py-5">

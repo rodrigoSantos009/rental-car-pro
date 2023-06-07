@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { useAuth } from "../../contexts/Auth/UseAuth";
@@ -75,8 +75,8 @@ export function Login() {
             />
           </div>
           <div className="flex justify-between mt-5">
-            <a className="underline" href="#">
-              Lembrar senha
+            <a className="underline cursor-pointer" onClick={() => navigate("/register")}>
+              Não possuo conta
             </a>
             <a className="underline" href="#">
               Esqueceu a senha?
@@ -89,11 +89,6 @@ export function Login() {
             >
               Entrar
             </button>
-            <Link to={"/register"}>
-              <button className="w-full bg-black text-white mb-3 rounded-sm p-2 font-bold">
-                Registre-se
-              </button>
-            </Link>
           </div>
         </form>
       </div>
