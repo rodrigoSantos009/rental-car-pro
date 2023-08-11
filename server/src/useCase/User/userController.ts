@@ -10,15 +10,12 @@ export class UserController {
     const { name, email, password } = req.body
 
     try {
-      const user = await this.userUseCase.execute({
-      name, 
-      email,
-      password
-    })
-
-    return res.status(201).json(user)
+      const user = await this.userUseCase.execute({name, email,password})
+      
+      return res.status(201).json(user)
     } catch(e) {
-      return res.status(400).json()
+      console.log(e)
+      return res.status(400).json(e)
     }
   }  
 
@@ -33,7 +30,7 @@ export class UserController {
 
       return res.status(200).json(userAuthenticate)
     } catch(e) {
-      console.error(e)
+      console.log(e)
       return res.status(400).json({ e })
     }
   }

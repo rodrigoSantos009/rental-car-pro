@@ -19,20 +19,26 @@ export function GetUserGetStorage() {
 
 export async function SignupRequest(name: string, email: string, password: string) {
   try {
-    const request = await api.post("/signup", { name, email, password })
-
-    return request.data
+    const result = await api.post("/signup", { 
+        name, 
+        email, 
+        password 
+    })
+    
+    return result.data
   } catch(e) {
-    return null
+    return 
   }
 }
 
 export async function LoginRequest(email: string, password: string) {
   try {
-    const request = await api.post("/signin", { email, password });
+    const request = await api.post("/signin", {
+       email, 
+       password 
+    });
     return request.data
   } catch(e) {
-    console.log(e)
     return 
   }
 }

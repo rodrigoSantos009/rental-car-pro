@@ -4,28 +4,16 @@ import { CarsInfo } from "../../types/CarType"
 
 import { BsFillPersonFill } from "react-icons/Bs"
 import { RentCarButton } from "../Rent/RentCarButton"
-import { useLocation } from "react-router-dom"
+import { useRent } from "../../contexts/Rent/Rent"
 
 export function CarModels() {
-  const location = useLocation()
+  const rent = useRent()
   const [cars, setCars] = useState<CarsInfo>([])
-  const [rentDate, setRentDate] = useState<string>("");
-  const [returnDate, setReturnDate] = useState<string>("");
-  const [days, setDays] = useState(0)  
-  const [pickUp, setPickup] = useState("")
-  const [checkOut, setCheckOut] = useState("");
 
   useEffect(() => {
     api.get("/cars").then((res) => {
       setCars(res.data);
     });
-    if (location.state) {
-      setRentDate(location.state.rentDate);
-      setReturnDate(location.state.returnDate);
-      setDays(location.state.days)
-      setPickup(location.state.pickUp)
-      setCheckOut(location.state.checkOut)
-    }
   }, []); 
 
   return (
@@ -57,13 +45,7 @@ export function CarModels() {
               </p>
             </div>
             <div className="w-full mt-4">
-              <RentCarButton
-                rentDate={rentDate}
-                returnDate={returnDate}
-                days={days}
-                pickUpCity={pickUp}
-                checkOutCity={checkOut}
-              />
+              <RentCarButton />
             </div>
           </div>
         ))}

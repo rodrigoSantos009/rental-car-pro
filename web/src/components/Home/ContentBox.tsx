@@ -5,15 +5,18 @@ import dayjs from "dayjs"
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { RentContext } from "../../contexts/Rent/Index"
+import { useRent } from "../../contexts/Rent/Rent"
 
 export function ContentBox() {
+  const rent = useRent();
   const [pickUp, setPickup] = useState("")
   const [checkOut, setCheckOut] = useState("")
   const [rentDate, setRentDate] = useState(Date)
   const [returnDate, setReturnDate] = useState(Date)
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit =  (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
     const formattedRentDate = dayjs(rentDate)
@@ -24,15 +27,16 @@ export function ContentBox() {
     
     hours = hours - (days * 24)    
 
-    navigate("/models", {
-      state: {
-        rentDate,
-        returnDate,
-        days,
-        pickUp,
-        checkOut,
-      },
-    });
+    const Rent = {
+      rentDate,
+      returnDate,
+      pickUp,
+      checkOut
+    }
+
+    rent.getRentData(Rent)
+      
+    navigate("/models");
   }  
 
   return (

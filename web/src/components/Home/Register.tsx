@@ -1,28 +1,47 @@
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../lib/axios'
+import { useAuth } from '../../contexts/Auth/UseAuth'
 
 export function Register() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
 
+  const { signup } = useAuth()
   const navigate = useNavigate()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+
+    if(!name || !email || !password) return; 
     
-    await api.post('/signup', { 
-      name,
-      email,
-      password
-    })
-    navigate('/login')
+    try {
+      const success = await signup(name, email, password);
+
+      if(!success) {
+        setError(true)
+
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log("signup", error);
+    }
   }
 
   return (
     <div className="login-card">
       <div className="login-card-form">
+        {error ? (
+          <div className="text-center mb-10 p-2 text-white font-bold bg-red-500">
+            Usuário já existe
+          </div>
+        ) : null}
         <h1 className="login-title">Criar conta</h1>
         <form onSubmit={handleSubmit} className="form-login">
           <div className="mb-7 flex flex-col">

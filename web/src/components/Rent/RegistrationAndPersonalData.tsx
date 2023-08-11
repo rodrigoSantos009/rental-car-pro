@@ -1,36 +1,15 @@
-import { useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { IoIosInformationCircle } from "react-icons/Io"
 import { Form } from "./Form";
 import { CreditCardForm } from "./CreditCardForm";
+import { useRent } from "../../contexts/Rent/Rent";
  
 export function RegistrationAndPersonalData() {
+  const rent = useRent();
   const notify = () => toast("Carro alugado com sucesso!");
-  const location = useLocation()
 
-  const [carModel, setCarModel] = useState("")
-  const [rentDay, setRentDay] = useState("");
-  const [returnDay, setReturnDay] = useState("");
-  const [totalValue, setTotalValue] = useState(0);
-  const [amountInInstallments, setAmountInInstallments] = useState(0);
-  const [pickUp, setPickUp] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-  
-  useEffect(() => {
-    if (location.state) {
-      setCarModel(location.state.model);
-      setRentDay(location.state.rentDay);
-      setReturnDay(location.state.returnDay);
-      setTotalValue(location.state.totalValue);
-      setAmountInInstallments(location.state.amountInInstallments);
-      setPickUp(location.state.pickUp);
-      setCheckOut(location.state.checkOut)
-    }
-  }, [location])
 
   return (
     <div className="rent-car mb-16">
@@ -74,26 +53,26 @@ export function RegistrationAndPersonalData() {
           <hr />
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Retirada</h2>
-            <p>{rentDay} às 08:00</p>
-            <p>{pickUp}</p>
+            <p>{rent.rentDate} às 08:00</p>
+            <p>{rent.pickUp}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Devolução</h2>
-            <p>{returnDay} às 08:00</p>
-            <p>{checkOut}</p>
+            <p>{rent.returnDate} às 08:00</p>
+            <p>{rent.checkOut}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 py-5">
             <h2 className="text-orange-100 font-bold text-lg">Modelo</h2>
-            <p>{carModel}</p>
+            <p></p>
           </div>
           <div className="px-7 h-[135px] flex flex-col justify-center text-right bg-orange-100            font-semibold rounded-b-md ">
             <h2 className="text-orange-200 text-lg">Valor total</h2>
             <div>
-              <p className="text-white">R$ {totalValue.toFixed(2)}</p>
+              <p className="text-white">R$ </p>
               <p className="text-white">
-                Em até 6x de R$ {amountInInstallments.toFixed(2)}
+                Em até 6x de R$ 
               </p>
             </div>
           </div>

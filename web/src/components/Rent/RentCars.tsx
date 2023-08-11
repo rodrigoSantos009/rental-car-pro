@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { CarsInfo } from "../../types/CarType";
 import { api } from "../../lib/axios";
 import { BsFillPersonFill } from "react-icons/Bs";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRent } from "../../contexts/Rent/Rent";
 
 type RentCarType = {
   id: string,
@@ -11,16 +12,9 @@ type RentCarType = {
 }
 
 export function RentCars() {
-  const location = useLocation()
-
+  const rent = useRent();
   const [cars, setCars] = useState<CarsInfo>([])
-  const [rentDay, setRentDay] = useState(location.state.rentDay)
-  const [returnDay, setReturnDay] = useState(location.state.returnDay)
-  const [days, setDays] = useState(location.state.totalDays)
-  const [pickUp, setPickUp] = useState(location.state.pickUp);
-  const [checkOut, setCheckOut] = useState(location.state.checkOut);
   const navigate = useNavigate()
-
   useEffect(() => {
     api.get("/cars").then((res) => {
       setCars(res.data);
@@ -28,16 +22,7 @@ export function RentCars() {
   }, []);
 
   function handleSelect(data: RentCarType) {
-    navigate(`/rent/${data.id}`, {
-      state: {
-        rentDay,
-        returnDay,
-        days,
-        value: data.price,
-        pickUp,
-        checkOut,
-      },
-    });
+    navigate(`/rent/${data.id}`);
   }
 
   return (
@@ -110,14 +95,14 @@ export function RentCars() {
             <hr />
             <div className="px-7 p-5">
               <h2 className="text-orange-100 font-bold text-lg">Retirada</h2>
-              <p>{rentDay} às 08:00</p>
-              <p>{pickUp}</p>
+              <p>{rent.rentDate} às 08:00</p>
+              <p>{rent.pickUp}</p>
             </div>
             <hr className="w-[90%] mx-auto" />
             <div className="px-7 p-5">
               <h2 className="text-orange-100 font-bold text-lg">Devolução</h2>
-              <p>{returnDay} às 08:00</p>
-              <p>{checkOut}</p>
+              <p>{rent.returnDate} às 08:00</p>
+              <p>{rent.checkOut}</p>
             </div>
             <hr className="w-[90%] mx-auto" />
           </div>

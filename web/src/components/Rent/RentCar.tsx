@@ -1,55 +1,45 @@
 import { useEffect, useState } from "react";
-import { useAsyncError, useNavigate, useParams } from "react-router-dom";
-
-import { useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { BsFillPersonFill } from "react-icons/Bs";
 import { CarInfo } from "../../types/CarType";
 
 import { api } from "../../lib/axios";
+import { useRent } from "../../contexts/Rent/Rent";
+import { totalDays } from "./TotalDays";
 
 type ICarId = {
   carId: string;
 };
 
 export function RentCar() {
-  const location = useLocation()
+  const rent = useRent();
+  const [car, setCar] = useState<CarInfo>();
+  const selected = true;
+  const { carId } = useParams<ICarId>();
+
+  const rentDate = new Date(`${rent.rentDate}`);
+  const returnDate = new Date(`${rent.returnDate}`);
+
+  const numberOfDays = totalDays(rentDate, returnDate, );
+  let totalValue;
+  let amountIn;
+  if(car?.rentalPrice !== undefined) {
+    totalValue = numberOfDays * car?.rentalPrice;
+    amountIn = totalValue / 6;
+  }
 
   useEffect(() => {
     api.get(`/cars/${carId}`).then((res) => {
       setCar(res.data);
     });
   }, []);
-
-  const [car, setCar] = useState<CarInfo | null>(null);
-  const [selected, setSelected] = useState(true);
-  const { carId } = useParams<ICarId>();
-  const [rentDay, setRentDay] = useState(location.state.rentDay);
-  const [returnDay, setReturnDay] = useState(location.state.returnDay);
-  const [days, setDays] = useState(location.state.days);
-  const [value, setValue] = useState(location.state.value);
-  const [pickUp, setPickUp] = useState(location.state.pickUp);
-  const [checkOut, setCheckOut] = useState(location.state.checkOut);
-   
-  const totalValue = days * value 
-  const amountInInstallments = totalValue / 6
-  
   const navigate = useNavigate();
 
   const handleFinish = (model: string) => {
-    navigate("/finish", {
-      state: {
-        rentDay,
-        returnDay,
-        model,
-        totalValue,
-        amountInInstallments,
-        pickUp,
-        checkOut,
-      },
-    });
-  }
-    
+    navigate("/finish");
+  };
+
   return (
     <div className="rent-car">
       <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-3">
@@ -113,14 +103,14 @@ export function RentCar() {
           <hr />
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Retirada</h2>
-            <p>{rentDay} às 08:00</p>
-            <p>{pickUp}</p>
+            <p>{rent.rentDate} às 08:00</p>
+            <p>{rent.pickUp}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 p-5">
             <h2 className="text-orange-100 font-bold text-lg">Devolução</h2>
-            <p>{returnDay} às 08:00</p>
-            <p>{checkOut}</p>
+            <p>{rent.returnDate} às 08:00</p>
+            <p>{rent.checkOut}</p>
           </div>
           <hr className="w-[90%] mx-auto" />
           <div className="px-7 py-5">
@@ -131,9 +121,9 @@ export function RentCar() {
             <h2 className="text-orange-200 text-lg">Valor total</h2>
             {selected ? (
               <div>
-                <p className="text-white">R$ {totalValue.toFixed(2)}</p>
+                <p className="text-white">R$ {totalValue?.toFixed(2)}</p>
                 <p className="text-white">
-                  Em até 6x de R$ {amountInInstallments.toFixed(2)}
+                  Em até 6x de R$ {amountIn?.toFixed(2)}
                 </p>
               </div>
             ) : (

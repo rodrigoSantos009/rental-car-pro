@@ -25,18 +25,19 @@ export class UserUseCase {
       data.email,
       hashPassword  
     )
-    
     await this.userRepository.saveUser(user)
+    
+    return user;
   }
 
   async comparePassword(password: string, hash: string) {
     const result = await bcrypt.compare(password, hash)
 
-    return result
+    return result 
   }
 
   async authenticate(email: string, password: string) {
-    const user = await this.userRepository.getUserByEmail(email)
+    const user = await this.userRepository.getUserByEmail(email)  
 
     if(!user) {
       throw UserError.UserNotFound()
