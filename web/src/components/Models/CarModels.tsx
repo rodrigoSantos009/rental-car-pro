@@ -4,10 +4,8 @@ import { CarsInfo } from "../../types/CarType"
 
 import { BsFillPersonFill } from "react-icons/Bs"
 import { RentCarButton } from "../Rent/RentCarButton"
-import { useRent } from "../../contexts/Rent/Rent"
 
 export function CarModels() {
-  const rent = useRent()
   const [cars, setCars] = useState<CarsInfo>([])
 
   useEffect(() => {

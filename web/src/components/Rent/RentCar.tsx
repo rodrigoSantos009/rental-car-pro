@@ -6,7 +6,7 @@ import { CarInfo } from "../../types/CarType";
 
 import { api } from "../../lib/axios";
 import { useRent } from "../../contexts/Rent/Rent";
-import { totalDays } from "./TotalDays";
+import { TotalValueAndAmountInInstallments } from "./TotalValueAndAmountInInstallments";
 
 type ICarId = {
   carId: string;
@@ -21,14 +21,12 @@ export function RentCar() {
   const rentDate = new Date(`${rent.rentDate}`);
   const returnDate = new Date(`${rent.returnDate}`);
 
-  const numberOfDays = totalDays(rentDate, returnDate, );
-  let totalValue;
-  let amountIn;
-  if(car?.rentalPrice !== undefined) {
-    totalValue = numberOfDays * car?.rentalPrice;
-    amountIn = totalValue / 6;
-  }
-
+  const result = TotalValueAndAmountInInstallments(
+    rentDate,
+    returnDate,
+    car?.rentalPrice
+  );
+  
   useEffect(() => {
     api.get(`/cars/${carId}`).then((res) => {
       setCar(res.data);
@@ -121,9 +119,9 @@ export function RentCar() {
             <h2 className="text-orange-200 text-lg">Valor total</h2>
             {selected ? (
               <div>
-                <p className="text-white">R$ {totalValue?.toFixed(2)}</p>
+                <p className="text-white">R$ {result.totalValue?.toFixed(2)}</p>
                 <p className="text-white">
-                  Em até 6x de R$ {amountIn?.toFixed(2)}
+                  Em até 6x de R$ {result.amountInInstallments?.toFixed(2)}
                 </p>
               </div>
             ) : (

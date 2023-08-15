@@ -5,11 +5,11 @@ import { IoIosInformationCircle } from "react-icons/Io"
 import { Form } from "./Form";
 import { CreditCardForm } from "./CreditCardForm";
 import { useRent } from "../../contexts/Rent/Rent";
+
  
 export function RegistrationAndPersonalData() {
   const rent = useRent();
   const notify = () => toast("Carro alugado com sucesso!");
-
 
   return (
     <div className="rent-car mb-16">

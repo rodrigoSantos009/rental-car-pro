@@ -3,6 +3,8 @@ export interface IRent {
   returnDate?: string,
   pickUp?: string,
   checkOut?: string,
+  carModel?: string,
+  
 }
 
 export interface IRentContext extends IRent {

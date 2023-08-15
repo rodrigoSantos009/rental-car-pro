@@ -14,7 +14,6 @@ export class UserController {
       
       return res.status(201).json(user)
     } catch(e) {
-      console.log(e)
       return res.status(400).json(e)
     }
   }  
@@ -30,7 +29,6 @@ export class UserController {
 
       return res.status(200).json(userAuthenticate)
     } catch(e) {
-      console.log(e)
       return res.status(400).json({ e })
     }
   }
